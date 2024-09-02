@@ -1,0 +1,116 @@
+.topbar-container {
+    width: 100%;
+    background: var(--main-color);
+    padding-right: 2%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.topbar-menu-icon {
+    display: none;
+}
+
+    /*--------------------- topbar top ---------------------------*/
+.topbar-top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px 0;
+    gap: 2.5%;
+}
+
+.topbar-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topbar-icon-number {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: red;
+    border-radius: 50%;
+    height: 22px;
+    width: 22px;
+    display: flex;
+    padding: 4px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.topbar-profile {
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    margin-left: 1.5%;
+    border: 2px solid var(--primary-color);
+}
+
+.topbar-profile img {
+    width: 100%;
+    object-fit: cover;
+}
+
+
+
+
+    /*--------------------------- MEDIA QUERYING ---------------------------------*/
+@media screen and (max-width: 1028px) {
+    .topbar-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 2%;
+    }
+
+    .topbar-menu-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    } 
+
+    .topbar-top {
+        flex: 1;
+        gap: 4%;
+    }
+
+    .topbar-profile {
+        width: 45px;
+        height: 45px;
+    }
+
+    .topbar-icon-number {
+        height: 20px;
+        width: 20px;
+    }
+
+    .topbar-icon-number p {
+        font-size: 15px;
+    }
+
+        /*------------------- sidebar small ---------------------*/
+    .Small_Sidebar_container {
+        background: var(--primary-color);
+        color: var(--main-color);
+        height: fit-content;
+        min-height: 100vh;
+        padding: 20px 10px 20px 15px;
+    }
+
+    .sidebar_logo {
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgb(167, 167, 167);
+    }
+
+    .sidebar_logo p {
+        font-size: 30px;
+        font-weight: bold;
+    }
+}

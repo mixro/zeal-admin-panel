@@ -1,0 +1,110 @@
+.newUser {
+    flex: 4;
+    padding-top: 4%;
+}
+
+.newUserTitle {
+  font-weight: 600;
+  padding-bottom: 2%;
+  padding-left: 31%;
+}
+
+.newUserForm {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.newUserItem {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+.newUserItem > label {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(151, 150, 150);
+}
+  
+.newUserItem > input {
+  height: 20px;
+  padding: 20px 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.newUserGender > input {
+  margin-top: 15px;
+}
+
+.newUserGender>label{
+    margin: 10px;
+    font-size: 18px;
+    color: #555;
+}
+
+.newUserSelect{
+    height: 40px;
+    border-radius: 5px;
+}
+
+.newUserButton{
+    width: 200px;
+    border: none;
+    background-color: darkblue;
+    color: white;
+    padding: 7px 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 770px){
+  .newUser {
+    width: 100vw;
+    overflow-x: hidden;
+    padding: 30px 4%;
+  }
+
+  .newLessons {
+    padding: 30px 4% 0 2%;
+  }
+
+  .newUserTitle {
+    font-weight: 500;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+
+  .newUserForm {
+    padding: 10px 0;
+  }
+
+  .newUserItem {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .newUserButton{
+    width: 100%;
+    border: none;
+    background-color: darkblue;
+    color: white;
+    padding: 7.5px 10px;
+    font-weight: 500;
+    border-radius: 10px;
+    margin-top: 30px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+}

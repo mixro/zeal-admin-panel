@@ -1,0 +1,26 @@
+.orderColor_button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+.orderColor_button p  {
+    text-transform: capitalize;
+}
+
+.orderColor {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    outline: none;
+}
+
+.orderItem_element {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

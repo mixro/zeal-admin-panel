@@ -1,0 +1,98 @@
+:root {
+    --main-color: #F4F5FA;
+    --minor-color: #f7f7f7;
+    --primary-color: #1D2756;
+    --secondary-color: #CFAE30;
+    --red-color: #ff0000;
+    --royalred-color: #f33756;
+    --royalblue-color: #0372c7;
+    --white-color: #fff;
+    --black-color: #161616;
+    --blue-color: #0000ff;
+    --green-color: #008000;
+    --button-color: #268bf6;
+
+    --top-blue: #0d5ff7;
+    --top-greenish: #049e80;
+    --top-gold: #e6a40b;
+
+    --box-shadow: 0.5px 0.5px 5px 0px rgba(0,0,0,0.5);
+}
+
+
+
+
+.layout-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100vw;
+    background: var(--main-color);
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+.layout-sidebar {
+    flex-basis: 20%;
+    height: 100vh;
+    top: 0;
+    position: sticky;
+    scrollbar-width: none;
+    overflow-y: scroll;
+}
+
+.layout-sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.layout-body {
+    flex-basis: 80%;
+}
+
+.layout-main {
+    padding: 20px 2%;
+}
+
+.layout-topbar {
+    width: 100%;
+    top: 0;
+    position: sticky;
+    z-index: 100;
+}
+
+
+
+
+    /*--------------------------- MEDIA QUERYING ---------------------------------*/
+@media screen and (max-width: 1028px) {
+    .layout-container {
+
+            /* highlighting */
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    .layout-sidebar {
+        display: none;
+    }
+
+    .layout-body {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+}
+
+
+
+
+@media screen and (max-width: 730px) {
+    .layout-topbar {
+        width: 100%;
+        max-width: 100%;
+    }
+} 
