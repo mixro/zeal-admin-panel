@@ -3,8 +3,22 @@ import "./dashboard.css"
 import { Slider } from "@mui/material"
 import Table from "../../components/table/Table"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Line, ComposedChart } from 'recharts';
+import { useEffect } from "react";
+import { getOrders, getProducts, getServices, getUsers } from "../../redux/apiCalls";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.zealUsers.users);
+  const orders = useSelector((state) => state.zealOrders.orders);
+  
+  useEffect(() => {
+    getProducts(dispatch);
+    getServices(dispatch);
+    getUsers(dispatch);
+    getOrders(dispatch);
+  }, [dispatch]);
 
   const dealsData = [
     { month: 'Jan', deals: 400 },
@@ -76,7 +90,7 @@ const Dashboard = () => {
                 <TrendingUp sx={{color: "#0d5ff7"}} />
               </div>
             </div>
-            <div className="dashboard-top-bottom">
+            <div className="dashboard-top-bottom"> 
               <p><span>+12%</span>From previous Month</p>
             </div>
           </div>
@@ -232,51 +246,20 @@ const Dashboard = () => {
               <TrendingUp />
             </div>
             <div className="dashboard-updates-body">
-              <div className="dashboard-updates-profile">
-                <div className="dashboard-updates-img">
-                  <img src="/images/chart.png" alt="US" />
+              {orders
+                .slice(0, 5)
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) 
+                .map((order) => (
+                <div key={order._id} className="dashboard-updates-profile">
+                  <div className="dashboard-updates-img">
+                    <img src="/images/chart.png" alt="US" />
+                  </div>
+                  <div className="dashboard-updates-desc">
+                    <p>{order.name}</p>
+                    <p>Created {moment(order.createdAt).fromNow()}</p>
+                  </div>
                 </div>
-                <div className="dashboard-updates-desc">
-                  <p>John Doe</p>
-                  <p>Created 3 weeks ago</p>
-                </div>
-              </div>
-              <div className="dashboard-updates-profile">
-                <div className="dashboard-updates-img">
-                  <img src="/images/chart.png" alt="US" />
-                </div>
-                <div className="dashboard-updates-desc">
-                  <p>John Doe</p>
-                  <p>Created 3 weeks ago</p>
-                </div>
-              </div>
-              <div className="dashboard-updates-profile">
-                <div className="dashboard-updates-img">
-                  <img src="/images/chart.png" alt="US" />
-                </div>
-                <div className="dashboard-updates-desc">
-                  <p>John Doe</p>
-                  <p>Created 3 weeks ago</p>
-                </div>
-              </div>
-              <div className="dashboard-updates-profile">
-                <div className="dashboard-updates-img">
-                  <img src="/images/chart.png" alt="US" />
-                </div>
-                <div className="dashboard-updates-desc">
-                  <p>John Doe</p>
-                  <p>Created 3 weeks ago</p>
-                </div>
-              </div>
-              <div className="dashboard-updates-profile">
-                <div className="dashboard-updates-img">
-                  <img src="/images/chart.png" alt="US" />
-                </div>
-                <div className="dashboard-updates-desc">
-                  <p>John Doe</p>
-                  <p>Created 3 weeks ago</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           <div className="dashboard-updates-item">
@@ -285,51 +268,20 @@ const Dashboard = () => {
               <People />
             </div>
             <div className="dashboard-updates-body">
-              <div className="dashboard-updates-profile">
-                <div className="dashboard-updates-img">
-                  <img src="/images/user.png" alt="US" />
+              {users
+                .slice(0, 6)
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) 
+                .map((user) => (
+                <div key={user._id} className="dashboard-updates-profile">
+                  <div className="dashboard-updates-img">
+                    <img src="/images/user.png" alt="US" />
+                  </div>
+                  <div className="dashboard-updates-desc">
+                    <p>{user.username}</p>
+                    <p>Joined {moment(user.createdAt).fromNow()}</p>
+                  </div>
                 </div>
-                <div className="dashboard-updates-desc">
-                  <p>John Doe</p>
-                  <p>Joined 3 weeks ago</p>
-                </div>
-              </div>
-              <div className="dashboard-updates-profile">
-                <div className="dashboard-updates-img">
-                  <img src="/images/user.png" alt="US" />
-                </div>
-                <div className="dashboard-updates-desc">
-                  <p>John Doe</p>
-                  <p>Joined 3 weeks ago</p>
-                </div>
-              </div>
-              <div className="dashboard-updates-profile">
-                <div className="dashboard-updates-img">
-                  <img src="/images/user.png" alt="US" />
-                </div>
-                <div className="dashboard-updates-desc">
-                  <p>John Doe</p>
-                  <p>Joined 3 weeks ago</p>
-                </div>
-              </div>
-              <div className="dashboard-updates-profile">
-                <div className="dashboard-updates-img">
-                  <img src="/images/user.png" alt="US" />
-                </div>
-                <div className="dashboard-updates-desc">
-                  <p>John Doe</p>
-                  <p>Joined 3 weeks ago</p>
-                </div>
-              </div>
-              <div className="dashboard-updates-profile">
-                <div className="dashboard-updates-img">
-                  <img src="/images/user.png" alt="US" />
-                </div>
-                <div className="dashboard-updates-desc">
-                  <p>John Doe</p>
-                  <p>Joined 3 weeks ago</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

@@ -18,7 +18,9 @@ const Sidebar = () => {
     <div className="sidebar-container">
       <div className="sidebar-wrapper">
         <div className="sidebar-top">
-          <h1>ZEAL ADMIN</h1>
+          <Link to='/' className='link-main'>
+            <h1>ZEAL ADMIN</h1>
+          </Link>
         </div>
 
         <div className="sidebar-links">

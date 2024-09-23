@@ -318,6 +318,10 @@
     border-radius: 50%;
 }
 
+.dashboard-updates-desc p:nth-child(1) {
+    text-transform: capitalize;
+}
+
 .dashboard-updates-desc p:nth-child(2) {
     font-size: 13px;
     line-height: 13px;

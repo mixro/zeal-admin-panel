@@ -1,14 +1,14 @@
 import { Rating } from '@mui/material';
-import { ProductsList } from '../../Dummydata';
 import './table.css'
 import { DataGrid } from "@mui/x-data-grid";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Table = () => {
-    const products = ProductsList;
+    const products = useSelector((state) => state.zealProducts.products);
 
     const columns = [
-        { field: "id", headerName: "ID", width: 80 },
+        { field: "_id", headerName: "ID", width: 80 },
         {
           field: "Product",
           headerName: "PRODUCT",
@@ -16,8 +16,8 @@ const Table = () => {
           renderCell: (params) => {
             return (
               <div className="table-products">
-                <img className="table-products-image" src="/images/cb.jpg" alt="CB" />
-                {params.row.name}
+                <img className="table-products-image" src={params.row.img} alt="CB" />
+                {params.row.title}
               </div>
             );
           },
@@ -30,7 +30,7 @@ const Table = () => {
           renderCell: (params) => {
             return (
               <div className='table-status'>
-                {params.row.status === 1 ? <button className="onstock-button">On stock</button> : <button className="offstock-button">Off stock</button>}
+                {params.row.status === true ? <button className="onstock-button">On stock</button> : <button className="offstock-button">Off stock</button>}
               </div>
             )
           }
@@ -42,7 +42,7 @@ const Table = () => {
           renderCell: (params) => {
             return (
               <div className='table-rating'>
-                <Rating name='half-rating' sx={{color: "#e99f00", display:{xs: 15, sm: 10,}}} size="small" value={params.row.rating} precision={0.5} readOnly />
+                <Rating name='half-rating' sx={{color: "#e99f00", display:{xs: 15, sm: 10,}}} size="small" value={4} precision={0.5} readOnly />
               </div>
             )
           }
@@ -54,7 +54,7 @@ const Table = () => {
           renderCell: (params) => {
             return (
               <div className="table-view">
-                <Link to={"/product/" + params.row.id}>
+                <Link to={"/product/" + params.row._id}>
                   <button>View</button>
                 </Link>
               </div>
@@ -70,7 +70,7 @@ const Table = () => {
             rows={products}
             disableSelectionOnClick
             columns={columns}
-            getRowId={(row) => row.id}
+            getRowId={(row) => row._id}
             pageSize={8}
             checkboxSelection
         />
@@ -80,7 +80,7 @@ const Table = () => {
             rows={products}
             disableSelectionOnClick
             columns={columns}
-            getRowId={(row) => row.id}
+            getRowId={(row) => row._id}
             pageSize={8}
             checkboxSelection
         />
