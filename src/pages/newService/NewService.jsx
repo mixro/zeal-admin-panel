@@ -1,6 +1,57 @@
+import { useState } from 'react';
 import './newService.css'
+import app from "../../firebase";
+import { useDispatch, useSelector } from 'react-redux';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { addService } from '../../redux/apiCalls';
 
 const NewService = () => {
+  const [inputs, setInputs] =  useState({});
+  const [file, setFile] = useState(null);
+  const dispatch = useDispatch();
+  const [perc, setPerc] = useState(0);
+  const {error, isFetching} = useSelector((state) => state.zealServices);
+
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev,  [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    const fileName = new Date().getTime() + file.name;
+    const storage = getStorage(app);
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed', 
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        setPerc(progress);
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+          default:
+            console.log("Upload is in progress");
+        }
+      }, 
+      (error) => {
+      }, 
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          const service = { ...inputs, img: downloadURL };
+          addService(service, dispatch);
+        });
+      }
+    );
+  } 
+
   return (
     <div className="newProduct">
         <h1 className="addProductTitle">NEW SERVICE</h1>
@@ -11,20 +62,22 @@ const NewService = () => {
               <input 
                 type="file" 
                 id="file" 
+                onChange={(e) => setFile(e.target.files[0])}
               />
             </div>
             <div style={{marginBottom: 30}}>
-              <p>uploading progress: 50%</p>
+              <p>uploading progress: {Math.floor(perc)}%</p>
             </div>
           </div>
           <div className="addProduct_container">
             <div className="addProduct_left">
               <div className="addProductItem">
-                <label>Name</label>
+                <label>Title</label>
                 <input 
-                  name='name'
+                  name='title'
                   type="text" 
                   placeholder="Eg; Autmation systems installation" 
+                  onChange={handleChange}
                 />
               </div>
               <div className="addProductItem">
@@ -33,14 +86,16 @@ const NewService = () => {
                   name="price"
                   type="number"
                   placeholder="Eg; 349045"
+                  onChange={handleChange}
                 />
               </div>
               <div className="addProductItem">
                 <label>Technicians</label>
                 <input
-                  name="technician"
+                  name="technicians"
                   type="number"
                   placeholder="Eg; 34"
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -66,7 +121,8 @@ const NewService = () => {
                     <label>Description</label>
                     <textarea 
                       defaultValue="Add Product description" 
-                      name='description' 
+                      name='desc'
+                      onChange={handleChange} 
                     >
                     </textarea>
                 </div>
@@ -74,8 +130,8 @@ const NewService = () => {
           </div>
   
           <div className="newRoom_margin">
-            <button className="addProductButton">Create</button>
-            {/* {error && <p style={{color: "red"}}>Error occured</p>}  */}
+            <button onClick={handleClick} className="addProductButton">{isFetching ? "Creating..." : "create"}</button>
+            {error && <p style={{color: "red"}}>Error occured</p>}
           </div>      
         </form>
     </div>

@@ -2,14 +2,25 @@ import { DataGrid } from '@mui/x-data-grid';
 import './products.css'
 import { DeleteOutline } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import { ProductsList } from '../../Dummydata';
 import { Rating } from '@mui/material';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { deleteProduct, getProducts } from '../../redux/apiCalls';
 
 const Products = () => {
-  const products = ProductsList;
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.zealProducts.products);
+
+  useEffect(() => {
+    getProducts(dispatch);
+  }, [dispatch]);
+
+  const handleDelete = (id) => {
+    deleteProduct(id, dispatch);
+  }
 
   const columns = [
-    { field: "id", headerName: "ID", width: 100 },
+    { field: "_id", headerName: "ID", width: 100 },
     {
       field: "product",
       headerName: "Product",
@@ -17,8 +28,8 @@ const Products = () => {
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            <img className="productListImg" src='../../../images/cb.jpg' alt="" />
-            {params.row.name}
+            <img className="productListImg" src={params.row.img} alt="" />
+            {params.row.title}
           </div>
         );
       },
@@ -43,7 +54,7 @@ const Products = () => {
       renderCell: (params) => {
         return (
           <div className='table-status'>
-            {params.row.status === 1 ? <button className="onstock-button">On stock</button> : <button className="offstock-button">Off stock</button>}
+            {params.row.status === true ? <button className="onstock-button">On stock</button> : <button className="offstock-button">Off stock</button>}
           </div>
         )
       }
@@ -66,14 +77,16 @@ const Products = () => {
       width: 150,
       renderCell: (params) => {
         return (
-          <>
-            <Link to={"/product/" + params.row.id}>
+          <div className="products-buttons">
+            <Link to={"/product/" + params.row._id}>
               <button className="productListEdit">Edit</button>
             </Link>
             <DeleteOutline
+              sx={{fontSize: 30}}
               className="productListDelete"
+              onClick={() => handleDelete(params.row._id)}
             />
-          </>
+          </div>
         );
       },
     },
@@ -88,7 +101,7 @@ const Products = () => {
           rows={products}
           disableSelectionOnClick
           columns={columns}
-          getRowId={(row) => row.id}
+          getRowId={(row) => row._id}
           pageSize={8}
           checkboxSelection
         />
@@ -98,7 +111,7 @@ const Products = () => {
           rows={products}
           disableSelectionOnClick
           columns={columns}
-          getRowId={(row) => row.id}
+          getRowId={(row) => row._id}
           pageSize={8}
           checkboxSelection
         />

@@ -1,5 +1,6 @@
 :root {
     --main-color: #F4F5FA;
+    --whiter-color: #fbfbfb;
     --minor-color: #f7f7f7;
     --primary-color: #1D2756;
     --secondary-color: #CFAE30;
@@ -20,6 +21,14 @@
 }
 
 
+.layout-component {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: var(--whiter-color);
+}
 
 
 .layout-container {
@@ -27,6 +36,7 @@
     align-items: flex-start;
     justify-content: space-between;
     width: 100vw;
+    max-width: 1440px;
     background: var(--main-color);
     overflow-x: hidden;
     height: 100vh;
@@ -34,6 +44,7 @@
 
 .layout-sidebar {
     flex-basis: 20%;
+    min-width: 260px;
     height: 100vh;
     top: 0;
     position: sticky;

@@ -210,19 +210,20 @@
     box-shadow: var(--box-shadow);
     border-radius: 5px;
     padding: 15px 10px;
+    margin-top: 5%;
 }
 
-.dashboard-progress-container h2 {
+.dashboard-progress-container h1 {
     display: none;
     text-transform: uppercase;
     font-weight: 500;
     text-align: center;
     margin-bottom: 30px;
+    font-size: 28px;
 }
 
 .dashboard-progress {
     width: 100%;
-    margin-top: 5%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -391,10 +392,6 @@
         gap: 40px;
     }
 
-    .dashboard-sales-item {
-        margin-bottom: 20px;
-    }
-
     .dashboard-sales-right{
         display: flex;
         align-items: center;
@@ -411,6 +408,10 @@
 
 
 @media screen and (max-width: 730px) {
+    .dashboard-sales-item {
+        margin-bottom: 15px;
+    }
+
     .navigation-nav-right {
         display: none;
     }
@@ -438,7 +439,10 @@
     }
 
         /*------------------ dashboard progress ----------------------*/
-    .dashboard-progress-container h2 {
+    .dashboard-progress-container {
+        margin-bottom: 35px;
+    }
+    .dashboard-progress-container h1 {
         display: block;
     }
 
@@ -457,7 +461,8 @@
 
     .dashboard-updates {
         flex-direction: column;
-        gap: 20px;
+        gap: 30px;
+        margin-bottom: 30px;
     }
 
     .dashboard-products h2 {

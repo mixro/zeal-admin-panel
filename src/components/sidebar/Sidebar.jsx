@@ -1,8 +1,19 @@
 import './sidebar.css'
-import { Link } from "react-router-dom";
-import { ChatBubble, Dashboard, DynamicFeed, ElectricalServices, Mail, People, Recycling, Report, Storefront, Timeline, TrendingUp, Work } from '@mui/icons-material'
+import { Link, useNavigate } from "react-router-dom";
+import { ChatBubble, Dashboard, DynamicFeed, ElectricalServices, Logout, Mail, People, Person, Recycling, Report, Storefront, Timeline, TrendingUp, Work } from '@mui/icons-material'
+import { userLogout } from '../../redux/apiCalls';
+import { useDispatch } from 'react-redux';
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    navigate('/');
+    userLogout(dispatch);
+  }
+
   return (
     <div className="sidebar-container">
       <div className="sidebar-wrapper">
@@ -78,6 +89,12 @@ const Sidebar = () => {
                 <p>New Service</p>
               </div>
             </Link>
+            <Link to='/new-user' className='link-main'>
+              <div className="sidebar-link">
+                <Person />
+                <p>New Customer</p>
+              </div>
+            </Link>
           </div>
 
           <div className="sidebar-links-wrapper">
@@ -118,6 +135,13 @@ const Sidebar = () => {
                 <p>Report</p>
               </div>
             </Link>
+          </div>
+
+          <div className="sidebar-links-wrapper">
+            <button onClick={handleLogout}>
+              <Logout />
+              LOGOUT
+            </button>
           </div>
         </div>
       </div>

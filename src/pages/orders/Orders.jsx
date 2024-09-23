@@ -1,12 +1,23 @@
 import { DeleteOutline } from '@mui/icons-material';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import { OrdersList } from '../../Dummydata';
+import moment from 'moment';
 import { DataGrid } from '@mui/x-data-grid';
 import './orders.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteOrder, getOrders } from '../../redux/apiCalls';
 
 const Orders = () => {
-    const orders = OrdersList;
+    const dispatch = useDispatch();
+    const orders = useSelector((state) => state.zealOrders.orders);
+
+    useEffect(() => {
+      getOrders(dispatch);
+    }, [dispatch]);
+
+    const handleDelete = (id) => {
+      deleteOrder(id, dispatch);
+    };
 
     const columns = [
         { field: "_id", headerName: "ID", width: 100 },
@@ -16,16 +27,28 @@ const Orders = () => {
           width: 180,
           renderCell: (params) => {
             return (
-              <div className="userListUser">
-                <Link to={`/user/${params.row.userId}`} className="link">
+              <div className="userListUser orderUser">
+                <Link to={`/user/${params.row.userId}`} className="link order-user-img">
                   <img className="userListImg" src="../../../images/user.png" alt="IM" />
                 </Link>
-                Zabron Raphael
+                {params.row.name}
               </div>
             );
           },
         },
         { field: "email", headerName: "Email", width: 170 },
+        {
+          field: "amount",
+          headerName: "Amount",
+          width: 120,
+          renderCell: (params) => {
+            return (
+              <div className="product-table-price">
+                <p>Tsh. {params.row.amount}</p>
+              </div>
+            )
+          }
+        },
         {
           field: "phoneNumber",
           headerName: "phoneNumber",
@@ -36,8 +59,8 @@ const Orders = () => {
           headerName: "created At",
           width: 140,
           renderCell: (params) => {
-            /*const date = moment(params.row.createdAt);*/
-            return <span>a month ago</span>;
+            const date = moment(params.row.createdAt);
+            return <span>{date.fromNow()}</span>;
           },
         },
         {
@@ -48,7 +71,7 @@ const Orders = () => {
         {
           field: "status",
           headerName: "Status",
-          width: 90,
+          width: 120,
           renderCell: (params) => {
             return (
               <>
@@ -63,21 +86,22 @@ const Orders = () => {
           width: 120,
           renderCell: (params) => {
             return (
-              <>
-                <Link to={`/order/` + params.row._id}>
-                  <button className="userListEdit">view</button>
-                </Link>
-                <DeleteOutline
-                  className="userListDelete"
-                />
-              </>
+              <div className="products-buttons">
+                  <Link to={`/order/` + params.row._id}>
+                    <button className="userListEdit">view</button>
+                  </Link>
+                  <DeleteOutline
+                    className="userListDelete"
+                    onClick={() => handleDelete(params.row._id)}
+                  />
+              </div>
             );
           },
         },
     ];
 
   return (
-    <div className="userList">
+    <div className="userList orderList">
         <h1>Products Orders</h1>
 
         <div className="datagrid_large">

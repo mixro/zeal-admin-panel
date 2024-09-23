@@ -33,6 +33,22 @@
     margin-bottom: 5px;
 }
 
+.sidebar-links-wrapper button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    gap: 5%;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 7px;
+    font-weight: bold;
+    color: var(--white-color);
+    background: var(--red-color);
+}
+
 .sidebar-links {
     padding-top: 30px;
 }
@@ -54,3 +70,4 @@
     color: var(--primary-color);
     cursor: pointer;
 }
+

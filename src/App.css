@@ -14,3 +14,7 @@
   height: 100vh;
   overflow-x: hidden;
 }
+
+.error {
+  color: red;
+}

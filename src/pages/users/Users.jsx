@@ -1,12 +1,23 @@
-import { DeleteOutline } from '@mui/icons-material';
-import { DataGrid } from '@mui/x-data-grid'
-import React from 'react'
-import { Link } from 'react-router-dom';
-import { UsersList } from '../../Dummydata';
 import './users.css';
+import moment from 'moment';
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom';
+import { DataGrid } from '@mui/x-data-grid'
+import { DeleteOutline } from '@mui/icons-material';
+import { useDispatch, useSelector } from "react-redux";
+import { deleteUser, getUsers } from '../../redux/apiCalls';
 
 const Users = () => {
-    const users = UsersList;
+    const dispatch = useDispatch();
+    const users = useSelector((state) => state.zealUsers.users);
+
+    useEffect(() => {
+        getUsers(dispatch);
+    }, [dispatch]);
+    
+    const handleDelete = (id) => {
+        deleteUser(id, dispatch);
+    };
 
     const columns = [
         { field: "_id", headerName: "ID", width: 120 },
@@ -15,15 +26,20 @@ const Users = () => {
             headerName: "User",
             width: 200,
             renderCell: (params) => {
-            return (
-                <div className="userListUser">
-                    <img className="userListImg" src="../../../images/user.png" alt="" />
-                    {params.row.username}
-                </div>
-            );
+                return (
+                    <div className="userListUser">
+                        <img className="userListImg" src="../../../images/user.png" alt="" />
+                        {params.row.username}
+                    </div>
+                );
             },
         },
         { field: "email", headerName: "Email", width: 210 },
+        {
+            field: "location",
+            headerName: "Address",
+            width: 120,
+        },
         {
             field: "isAdmin",
             headerName: "isAdmin",
@@ -32,10 +48,10 @@ const Users = () => {
         {
             field: "createdAt",
             headerName: "Joined At",
-            width: 200,
+            width: 150,
             renderCell: (params) => {
-            /*const date = moment(params.row.createdAt);*/
-            return <span>a month ago</span>;
+            const date = moment(params.row.createdAt);
+            return <span>{date.fromNow()}</span>;
             },
         },
         {
@@ -43,16 +59,18 @@ const Users = () => {
             headerName: "Action",
             width: 120,
             renderCell: (params) => {
-            return (
-                <>
-                <Link to={"/user/" + params.row._id}>
-                    <button className="userListEdit">Edit</button>
-                </Link>
-                <DeleteOutline
-                    className="userListDelete"
-                />
-                </>
-            );
+                return (
+                    <div className="products-buttons">
+                        <Link to={"/user/" + params.row._id}>
+                            <button className="userListEdit">Edit</button>
+                        </Link>
+                        <DeleteOutline
+                            sx={{fontSize: 30}}
+                            className="productListDelete"
+                            onClick={() => handleDelete(params.row._id)}
+                        />
+                    </div>
+                );
             },
         },
     ];

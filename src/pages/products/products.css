@@ -28,7 +28,7 @@
     background-color: #3bb077;
     color: white;
     cursor: pointer;
-    margin-right: 20px;
+    margin-right: 15px;
 }
 
 .productListDelete{
@@ -40,6 +40,11 @@
     font-weight: bold;
 }
 
+.products-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
 

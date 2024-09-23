@@ -2,10 +2,22 @@ import { DataGrid } from '@mui/x-data-grid';
 import './services.css';
 import { DeleteOutline } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import { ServicesList } from '../../Dummydata';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import moment from 'moment';
+import { deleteService, getServices } from '../../redux/apiCalls';
 
 const Services = () => {
-    const services = ServicesList;
+    const dispatch = useDispatch();
+    const services = useSelector((state) => state.zealServices.services);
+
+    useEffect(() => {
+        getServices(dispatch);
+    }, [dispatch]);
+
+    const handleDelete = (id) => {
+        deleteService(id, dispatch);
+    }
 
     const columns = [
         { field: "_id", headerName: "ID", width: 80 },
@@ -16,7 +28,7 @@ const Services = () => {
             renderCell: (params) => {
             return (
                 <div className="userListUser">
-                    <img className="userListImg" src="../../../images/4.jpg" alt="" />
+                    <img className="userListImg" src={params.row.img} alt="" />
                     {params.row.title}
                 </div>
             );
@@ -45,8 +57,8 @@ const Services = () => {
             headerName: "Created at",
             width: 120,
             renderCell: (params) => {
-            /*const date = moment(params.row.createdAt);*/
-            return <span>a month ago</span>;
+            const date = moment(params.row.createdAt);
+            return <span>{date.fromNow()}</span>;
             },
         },
         {
@@ -55,14 +67,16 @@ const Services = () => {
             width: 120,
             renderCell: (params) => {
             return (
-                <>
-                <Link to={"/service/" + params.row._id}>
-                    <button className="userListEdit">Edit</button>
-                </Link>
-                <DeleteOutline
-                    className="userListDelete"
-                />
-                </>
+                <div className="products-buttons">
+                    <Link to={"/service/" + params.row._id}>
+                        <button className="userListEdit">Edit</button>
+                    </Link>
+                    <DeleteOutline
+                    sx={{fontSize: 30}}
+                    className="productListDelete"
+                    onClick={() => handleDelete(params.row._id)}
+                    />
+                </div>
             );
             },
         },

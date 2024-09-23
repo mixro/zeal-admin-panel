@@ -1,9 +1,20 @@
 import './menu.css'
-import { Link } from "react-router-dom";
-import { ChatBubble, Dashboard, DynamicFeed, ElectricalServices, Mail, People, Recycling, Report, Storefront, Timeline, TrendingUp, Work } from '@mui/icons-material'
+import { Link, useNavigate } from "react-router-dom";
+import { ChatBubble, Dashboard, DynamicFeed, ElectricalServices, Logout, Mail, People, Recycling, Report, Storefront, Timeline, TrendingUp, Work } from '@mui/icons-material'
+import { useDispatch } from 'react-redux';
+import { userLogout } from '../../redux/apiCalls';
 
 
 const MenuComp = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    navigate('/');
+    userLogout(dispatch);
+  }
+
   return (
     <div className="menu-container">
       <div className="sidebar-links">
@@ -115,6 +126,13 @@ const MenuComp = () => {
             </div>
           </Link>
         </div>
+
+        <div className="sidebar-links-wrapper">
+            <button onClick={handleLogout}>
+              <Logout />
+              LOGOUT
+            </button>
+          </div>
       </div>
     </div>
   )

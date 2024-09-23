@@ -1,3 +1,14 @@
+.orderList {
+    width: 100%;
+    max-width: calc(100vw - 300px);
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+
+.orderList::-webkit-scrollbar {
+    display: none;
+}
+
 .userListStatus {
     border: none;
     border-radius: 10px;
@@ -11,4 +22,16 @@
 .link {
     color: inherit;
     text-decoration: none;
+}
+
+.orderUser {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.order-user-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

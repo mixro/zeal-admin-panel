@@ -18,35 +18,37 @@ import Order from '../../pages/order/Order';
 
 const Layout = () => {
   return (
-    <div className="layout-container">
-        <div className="layout-sidebar">
-            <Sidebar />
-        </div>
-        <div className="layout-body">
-            <div className="layout-topbar">
-                <Topbar />
+    <div className="layout-component">
+        <div className="layout-container">
+            <div className="layout-sidebar">
+                <Sidebar />
             </div>
-            <div className="layout-main">
-                <Routes>
-                    <Route path='/' element={<Dashboard />} />
+            <div className="layout-body">
+                <div className="layout-topbar">
+                    <Topbar />
+                </div>
+                <div className="layout-main">
+                    <Routes>
+                        <Route path='/' element={<Dashboard />} />
 
-                    <Route path='/orders' element={<Orders />} />
-                    <Route path='/order/:id' element={<Order />} />
-                    
-                    <Route path='/products' element={<Products />} />
-                    <Route path='/product/:id' element={<Product />} />
-                    <Route path='/new-product' element={<NewProduct />} />
-                    
-                    <Route path='/users' element={<Users />} />
-                    <Route path='/user/:id' element={<User />} />
-                    <Route path='/new-user' element={<NewUser />} />
+                        <Route path='/orders' element={<Orders />} />
+                        <Route path='/order/:id' element={<Order />} />
+                        
+                        <Route path='/products' element={<Products />} />
+                        <Route path='/product/:id' element={<Product />} />
+                        <Route path='/new-product' element={<NewProduct />} />
+                        
+                        <Route path='/users' element={<Users />} />
+                        <Route path='/user/:id' element={<User />} />
+                        <Route path='/new-user' element={<NewUser />} />
 
-                    <Route path='/services' element={<Services />} />
-                    <Route path='/service/:id' element={<Service />} />
-                    <Route path='/new-services' element={<NewService />} />
-                    
-                    <Route path='/recycling' element={<Recycling />} />
-                </Routes>
+                        <Route path='/services' element={<Services />} />
+                        <Route path='/service/:id' element={<Service />} />
+                        <Route path='/new-services' element={<NewService />} />
+                        
+                        <Route path='/recycling' element={<Recycling />} />
+                    </Routes>
+                </div>
             </div>
         </div>
     </div>

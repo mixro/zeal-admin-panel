@@ -180,7 +180,7 @@ export const OrdersList = [
         address: "Ubungo, Dar es salaam",
         status: "pending",
     },
-    {
+    /*{
         _id: "eruijskf34jassd98jksdsjd",
         user: {
             name: "Zabron Raphael",
@@ -344,7 +344,7 @@ export const OrdersList = [
         phoneNumber: "+255798343434",
         address: "Ubungo, Dar es salaam",
         status: "done",
-    },
+    },*/
 ]
 
 export const ServicesList = [

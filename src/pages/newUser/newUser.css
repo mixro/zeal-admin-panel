@@ -73,7 +73,7 @@
   .newUser {
     width: 100vw;
     overflow-x: hidden;
-    padding: 30px 4%;
+    padding: 30px 2%;
   }
 
   .newLessons {
@@ -84,15 +84,19 @@
     font-weight: 500;
     font-size: 30px;
     margin-bottom: 20px;
+    padding-left: 0;
+    text-align: center;
   }
 
   .newUserForm {
     padding: 10px 0;
+    flex-direction: column;
   }
 
   .newUserItem {
     margin-right: 0;
     margin-bottom: 20px;
+    width: 96%;
   }
 
   .newUserButton{

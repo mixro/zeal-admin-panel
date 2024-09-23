@@ -4,9 +4,13 @@ import { Link } from 'react-router-dom'
 import { Box, Drawer } from '@mui/material'
 import React, { useState } from 'react'
 import MenuComp from '../menu/MenuComp'
+import { useSelector } from 'react-redux'
 
 const Topbar = () => {
   const [state, setState] = useState({ left: false });
+  const users = useSelector((state) => state.zealUsers.users);
+  const orders = useSelector((state) => state.zealOrders.orders);
+  const services = useSelector((state) => state.zealServices.services);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -32,7 +36,6 @@ const Topbar = () => {
     </Box>
   );
 
-
   return (
     <div className="topbar-container">
       <div className="topbar-menu-icon">
@@ -51,7 +54,7 @@ const Topbar = () => {
       </div>
 
       <div className="topbar-top">
-        <Link to='/' className='link-main'>
+        <Link to='/recycling' className='link-main'>
           <div className="topbar-icon">
             <Recycling sx={{fontSize: 30}} />
             <div className="topbar-icon-number">
@@ -59,27 +62,27 @@ const Topbar = () => {
             </div>
           </div>
         </Link>
-        <Link to='/' className='link-main'>
+        <Link to='/services' className='link-main'>
           <div className="topbar-icon">
             <ElectricalServices sx={{fontSize: 30}} />
             <div className="topbar-icon-number">
-              <p>5</p>
+              <p>{services.length}</p>
             </div>
           </div>
         </Link>
-        <Link to='/' className='link-main'>
+        <Link to='/orders' className='link-main'>
           <div className="topbar-icon">
             <AttachMoney sx={{fontSize: 30}} />
             <div className="topbar-icon-number">
-              <p>9</p>
+              <p>{orders.length}</p>
             </div>
           </div>
         </Link>
-        <Link to='/' className='link-main'>
+        <Link to='/users' className='link-main'>
           <div className="topbar-icon">
             <People sx={{fontSize: 30}} />
             <div className="topbar-icon-number">
-              <p>6</p>
+              <p>{users.length}</p>
             </div>
           </div>
         </Link>

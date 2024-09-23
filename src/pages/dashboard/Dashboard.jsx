@@ -167,7 +167,7 @@ const Dashboard = () => {
         </div>
 
         <div className="dashboard-progress-container">
-          <h2>Progress</h2>
+          <h1>Progress</h1>
           <div className="dashboard-progress">
             <div className="dashboard-progress-item">
               <p>Published project</p>
@@ -176,17 +176,17 @@ const Dashboard = () => {
             </div>
             <div className="dashboard-progress-item royalred-font">
               <p>Complete Task</p>
-              <h2>4, 569 <span>+1.69%</span></h2>
+              <h2>4, 569 <span>-0.5%</span></h2>
               <Slider value={50} sx={{ color: '#0d5ff7' }} aria-label="Default" valueLabelDisplay="auto" />
             </div>
             <div className="dashboard-progress-item">
               <p>Successfully Task</p>
-              <h2>84% <span>+1.69%</span></h2>
+              <h2>84% <span>+0.99%</span></h2>
               <Slider value={80} sx={{ color: '#049e80' }} aria-label="Default" valueLabelDisplay="auto" />
             </div>
             <div className="dashboard-progress-item">
               <p>Ongoing project</p>
-              <h2>365 <span>+1.69%</span></h2>
+              <h2>365 <span>+0.35%</span></h2>
               <Slider value={40} sx={{ color: '#e6a40b' }} aria-label="Default" valueLabelDisplay="auto" />
             </div>
           </div>
