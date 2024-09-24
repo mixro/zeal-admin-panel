@@ -113,11 +113,9 @@ const Product = () => {
                       <span className="productInfoValue">{product.status === 1 ? "On stock" : "Off stock"}</span>
                   </div>
                   <div className="productInfoItem">
-                      <span className="productInfoKey">Categories:</span>
+                      <span className="productInfoKey">Category:</span>
                       <span className="productInfoValue">
-                        {product.categories.map((cat) => (
-                          <p key={cat.id} style={{whiteSpace: "nowrap"}}>{cat}</p>
-                        ))}
+                        {product.type}
                       </span>
                   </div>
                   <div className="productInfoItem">
@@ -125,7 +123,7 @@ const Product = () => {
                       <span className="productInfoValue">{product.brand}</span>
                   </div>
                   <div className="productInfoItemm">
-                      <p>"We take pride in offering a wide range of high quality electrical"</p>
+                      <p>{product.desc}</p>
                   </div>
               </div>
           </div>

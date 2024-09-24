@@ -101,19 +101,11 @@ const Service = () => {
                       <span className="productInfoValue">{service.technicians}</span>
                   </div>
                   <div className="productInfoItem">
-                      <span className="productInfoKey">Status:</span>
-                      <span className="productInfoValue">On stock</span>
-                  </div>
-                  <div className="productInfoItem">
-                      <span className="productInfoKey">Category:</span>
-                      <span className="productInfoValue">Automation and Robotics</span>
-                  </div>
-                  <div className="productInfoItem">
-                      <span className="productInfoKey">Brand: </span>
-                      <span className="productInfoValue">Siemes</span>
+                      <span className="productInfoKey">Field:</span>
+                      <span className="productInfoValue">{service.field}</span>
                   </div>
                   <div className="productInfoItemm">
-                      <p>"We take pride in offering a wide range of high quality electrical"</p>
+                      <p>{service.desc}</p>
                   </div>
               </div>
           </div>
@@ -153,15 +145,6 @@ const Service = () => {
                           placeholder="Automation"
                         />
                       </div>
-                      <div className="updateProductItem">
-                        <label>Technicians</label>
-                        <input
-                          name="technicians"
-                          type="number"
-                          placeholder="Siemens"
-                          onChange={handleChange}
-                        />
-                      </div>
                     </div>
 
                     <div className="productFormLeft-item">
@@ -175,11 +158,13 @@ const Service = () => {
                         />
                       </div>
                       <div className="updateProductItem">
-                        <label>Status</label>
-                        <select name="status" id="active">
-                          <option value="free">On stock</option>
-                          <option value="occupied">Off stock</option>
-                        </select>
+                        <label>Technicians</label>
+                        <input
+                          name="technicians"
+                          type="number"
+                          placeholder="Siemens"
+                          onChange={handleChange}
+                        />
                       </div>
                       <div className="updateProductItem">
                         <label>Image</label>
